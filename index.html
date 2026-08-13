@@ -8,6 +8,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <noscript>
+        <style>
+            .block1-glav__reveal,
+            .block1-glav__quote-author,
+            .block3-algo__note-author,
+            .block4-flags__reveal,
+            .block6-pay__quote-author {
+                opacity: 1 !important;
+                transform: none !important;
+                animation: none !important;
+            }
+        </style>
+    </noscript>
     <style>
         /* ========== CSS ПЕРЕМЕННЫЕ ========== */
         :root {
@@ -68,7 +81,131 @@
         }
 
         /* ========== АНИМАЦИИ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ ========== */
-        
+        @keyframes block1-fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes block1-caret-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .block1-glav__reveal {
+            opacity: 0;
+        }
+
+        .block1-glav.is-animated .block1-glav__reveal {
+            animation: block1-fade-up 0.7s ease forwards;
+        }
+
+        .block4-flags__reveal {
+            opacity: 0;
+        }
+
+        .block4-flags.is-animated .block4-flags__reveal {
+            animation: block1-fade-up 0.65s ease forwards;
+        }
+
+        .block1-glav.is-animated .block1-glav__label {
+            animation-delay: 0.05s;
+        }
+
+        .block1-glav.is-animated .block1-glav__title {
+            animation-delay: 0.2s;
+        }
+
+        .block1-glav.is-animated .block1-glav__lead {
+            animation-delay: 0.35s;
+        }
+
+        .block1-glav.is-animated .block1-glav__author {
+            animation-delay: 0.5s;
+        }
+
+        .block1-glav.is-animated .block1-glav__image {
+            animation-delay: 0.65s;
+        }
+
+        .block1-glav.is-animated .block1-glav__toc {
+            animation-delay: 0.8s;
+        }
+
+        .block1-glav__quote-text.is-typing::after,
+        .block1-glav__quote-author.is-typing::after,
+        .block3-algo__note-text.is-typing::after,
+        .block3-algo__note-author.is-typing::after,
+        .block6-pay__quote-text.is-typing::after,
+        .block6-pay__quote-author.is-typing::after {
+            content: '';
+            display: inline-block;
+            width: 2px;
+            height: 0.85em;
+            margin-left: 3px;
+            vertical-align: -0.05em;
+            background-color: var(--color-green-primary);
+            animation: block1-caret-blink 0.8s step-end infinite;
+        }
+
+        .block1-glav__quote-author,
+        .block3-algo__note-author,
+        .block6-pay__quote-author {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .block1-glav__quote-author.is-visible,
+        .block1-glav__quote-author.is-typing,
+        .block3-algo__note-author.is-visible,
+        .block3-algo__note-author.is-typing,
+        .block6-pay__quote-author.is-visible,
+        .block6-pay__quote-author.is-typing {
+            opacity: 1;
+        }
+
+        .block1-glav__toc-link.is-active {
+            color: var(--color-green-primary);
+        }
+
+        .block1-glav__toc-link.is-active::before {
+            background-color: var(--color-green-primary);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .block1-glav__reveal,
+            .block1-glav.is-animated .block1-glav__reveal,
+            .block4-flags__reveal,
+            .block4-flags.is-animated .block4-flags__reveal {
+                opacity: 1;
+                transform: none;
+                animation: none;
+            }
+
+            .block1-glav__quote-text.is-typing::after,
+            .block3-algo__note-text.is-typing::after,
+            .block3-algo__note-author.is-typing::after,
+            .block6-pay__quote-text.is-typing::after,
+            .block6-pay__quote-author.is-typing::after {
+                display: none;
+            }
+
+            .block1-glav__quote-author,
+            .block3-algo__note-author,
+            .block6-pay__quote-author {
+                opacity: 1;
+            }
+        }
+
 
 
         /* ========== БАЗОВЫЕ СТИЛИ ========== */
@@ -84,6 +221,7 @@
         html {
             overflow-x: hidden;
             max-width: 100%;
+            scroll-behavior: smooth;
         }
 
         /* Основные стили Body */
@@ -122,6 +260,14 @@
             max-width: var(--container-width);
             margin: 0 auto;
             width: 100%;
+        }
+
+        section[id] {
+            scroll-margin-top: 24px;
+        }
+
+        #conclusion {
+            scroll-margin-top: 40px;
         }
 
         /* ========== BLOCK1-GLAV: Hero секция ========== */
@@ -308,7 +454,7 @@
         .block1-glav__quote-text {
             font-size: var(--font-size-h2);
             color: var(--color-dark);
-            line-height: 1;
+            line-height: 1.25;
             margin-bottom: 15px;
             max-width: 800px;
         }
@@ -316,7 +462,8 @@
         .block1-glav__quote-author {
             font-size: var(--font-size-text);
             color: var(--color-gray-text);
-            line-height: 1;
+            line-height: 1.25;
+            min-height: 1.25em;
         }
 
         /* ---------- Адаптив BLOCK1 ---------- */
@@ -675,6 +822,7 @@
             font-size: var(--font-size-text);
             color: var(--color-gray-text-secondary);
             line-height: 1.4;
+            min-height: 1.4em;
         }
 
         .block3-algo__outro {
@@ -1189,6 +1337,7 @@
             font-size: var(--font-size-text);
             color: var(--color-gray-text-secondary);
             line-height: 1.4;
+            min-height: 1.4em;
         }
 
         .block6-pay__outro .block6-pay__text:last-child {
@@ -2434,7 +2583,7 @@
             }
         }
 
-
+        
     </style>
 </head>
 <body>
@@ -2444,7 +2593,7 @@
             <div class="main-container">
 
                 <!-- Заголовок блока -->
-                <div class="block1-glav__label">
+                <div class="block1-glav__label block1-glav__reveal">
                     <span class="block1-glav__label-text">База знаний</span>
                     <span class="block1-glav__label-line" aria-hidden="true"></span>
                 </div>
@@ -2453,11 +2602,11 @@
 
                     <!-- 1. Главный контент -->
                     <div class="block1-glav__main">
-                        <h1 class="block1-glav__title">
+                        <h1 class="block1-glav__title block1-glav__reveal">
                             Как проверить поставщика в&nbsp;Китае перед оплатой
                         </h1>
 
-                        <p class="block1-glav__lead">
+                        <p class="block1-glav__lead block1-glav__reveal">
                             Работа с китайскими поставщиками открывает широкие возможности для российского бизнеса, 
                             но сопряжена с существенными рисками из-за незнания того, как ведут бизнес китайцы. 
                             По данным отраслевых аналитиков, до 30% импортеров сталкиваются с проблемами при первой 
@@ -2465,7 +2614,7 @@
                             до перевода оплаты — не формальность, а необходимый этап минимизации финансовых потерь.
                         </p>
 
-                        <div class="block1-glav__author">
+                        <div class="block1-glav__author block1-glav__reveal">
                             <img
                                 class="block1-glav__author-avatar"
                                 src="images/block1/author.webp"
@@ -2480,7 +2629,7 @@
                         </div>
 
                         <img
-                            class="block1-glav__image"
+                            class="block1-glav__image block1-glav__reveal"
                             src="images/block1/hero.webp"
                             alt="Шанхай: небоскрёбы и флаг Китая"
                             width="800"
@@ -2489,7 +2638,7 @@
                     </div>
 
                     <!-- 2. Содержание -->
-                    <aside class="block1-glav__toc">
+                    <aside class="block1-glav__toc block1-glav__reveal">
                         <nav class="block1-glav__toc-box" aria-label="Содержание статьи">
                             <h2 class="block1-glav__toc-title">Содержание</h2>
                             <ul class="block1-glav__toc-list">
@@ -2540,7 +2689,7 @@
                     <!-- 3. Цитата -->
                     <blockquote class="block1-glav__quote">
                         <div class="block1-glav__quote-inner">
-                            <p class="block1-glav__quote-text">
+                            <p class="block1-glav__quote-text" data-typewriter>
                                 «Доверие в&nbsp;международном бизнесе должно подтверждаться
                                 документами, а не словами. Проверка поставщика&nbsp;—
                                 это инвестиция в&nbsp;безопасность вашей сделки».
@@ -2729,7 +2878,7 @@
 
                     <!-- Заметка -->
                     <aside class="block3-algo__note">
-                        <p class="block3-algo__note-text">
+                        <p class="block3-algo__note-text" data-typewriter>
                             «Если поставщик уклоняется от&nbsp;демонстрации производства или
                             предоставляет только стоковые фото&nbsp;— это серьёзный сигнал
                             перепроверить его надёжность».
@@ -2782,10 +2931,10 @@
 
                 <!-- 1. Заголовок и текст -->
                 <div class="block4-flags__intro">
-                    <h2 class="block4-flags__title">
+                    <h2 class="block4-flags__title block4-flags__reveal">
                         Красные флаги: когда стоит отказаться от&nbsp;сотрудничества
                     </h2>
-                    <p class="block4-flags__desc">
+                    <p class="block4-flags__desc block4-flags__reveal">
                         Определённые сигналы должны насторожить импортера и&nbsp;стать поводом
                         для приостановки переговоров:
                     </p>
@@ -2794,7 +2943,7 @@
                 <div class="block4-flags__grid">
 
                     <!-- Часть 1: картинка -->
-                    <div class="block4-flags__media">
+                    <div class="block4-flags__media block4-flags__reveal">
                         <img
                             class="block4-flags__image"
                             src="images/block4/shield.webp"
@@ -2806,19 +2955,19 @@
 
                     <!-- Часть 2: теги -->
                     <ul class="block4-flags__tags">
-                        <li class="block4-flags__tag">
+                        <li class="block4-flags__tag block4-flags__reveal">
                             <img class="block4-flags__tag-icon" src="images/block4/icon-prepay.svg" alt="" aria-hidden="true">
                             <span class="block4-flags__tag-text">
                                 Требование 100% предоплаты по&nbsp;первому контракту
                             </span>
                         </li>
-                        <li class="block4-flags__tag">
+                        <li class="block4-flags__tag block4-flags__reveal">
                             <img class="block4-flags__tag-icon" src="images/block4/icon-docs.svg" alt="" aria-hidden="true">
                             <span class="block4-flags__tag-text">
                                 Отказ предоставить копии учредительных документов до&nbsp;подписания договора
                             </span>
                         </li>
-                        <li class="block4-flags__tag">
+                        <li class="block4-flags__tag block4-flags__reveal">
                             <img class="block4-flags__tag-icon" src="images/block4/icon-requisites.svg" alt="" aria-hidden="true">
                             <span class="block4-flags__tag-text">
                                 Расхождение реквизитов в&nbsp;договоре, инвойсе и&nbsp;на&nbsp;сайте компании
@@ -2828,19 +2977,19 @@
 
                     <!-- Часть 3: теги -->
                     <ul class="block4-flags__tags">
-                        <li class="block4-flags__tag">
+                        <li class="block4-flags__tag block4-flags__reveal">
                             <img class="block4-flags__tag-icon" src="images/block4/icon-card.svg" alt="" aria-hidden="true">
                             <span class="block4-flags__tag-text">
                                 Использование личных банковских счетов вместо корпоративных
                             </span>
                         </li>
-                        <li class="block4-flags__tag">
+                        <li class="block4-flags__tag block4-flags__reveal">
                             <img class="block4-flags__tag-icon" src="images/block4/icon-phone.svg" alt="" aria-hidden="true">
                             <span class="block4-flags__tag-text">
                                 Отсутствие стационарного телефона, указание мобильного в&nbsp;качестве основного контакта
                             </span>
                         </li>
-                        <li class="block4-flags__tag">
+                        <li class="block4-flags__tag block4-flags__reveal">
                             <img class="block4-flags__tag-icon" src="images/block4/icon-pressure.svg" alt="" aria-hidden="true">
                             <span class="block4-flags__tag-text">
                                 Давление на&nbsp;принятие быстрого решения с&nbsp;аргументацией «ограниченного предложения»
@@ -2945,7 +3094,7 @@
 
                 <blockquote class="block6-pay__quote">
                     <div class="block6-pay__quote-inner">
-                        <p class="block6-pay__quote-text">
+                        <p class="block6-pay__quote-text" data-typewriter>
                             «Никогда не переводите полную оплату новому поставщику без
                             предварительной инспекции товара. Даже при идеальных документах
                             человеческий фактор и&nbsp;производственные ошибки никто не&nbsp;отменял».
@@ -2956,7 +3105,7 @@
                     </div>
                 </blockquote>
 
-                <div class="block6-pay__outro">
+                <div class="block6-pay__outro" id="conclusion">
                     <p class="block6-pay__text">
                         Проверка китайского поставщика — многоэтапный процесс, требующий системного подхода. 
                         Сочетание работы с официальными реестрами, анализа цифрового следа компании, 
@@ -3139,7 +3288,7 @@
                 </div>
             </div>
         </section>
-    </main>
+    </main>    
 
         <footer class="footer">
         <div class="container-footer">
@@ -3297,6 +3446,206 @@
     </footer>
 
 <script>
+        function createScrollTypewriter(config) {
+            const root = config.root;
+            const textEl = config.textEl;
+            const authorEl = config.authorEl;
+            const boxEl = config.boxEl || root;
+            if (!root || !textEl) return;
+
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const fullText = textEl.textContent.replace(/\s+/g, ' ').trim();
+            const fullAuthor = authorEl ? authorEl.textContent.replace(/\s+/g, ' ').trim() : '';
+            let typingStarted = false;
+
+            function typeInto(element, text, onDone) {
+                const chars = Array.from(text);
+                let index = 0;
+                element.classList.add('is-typing');
+                element.textContent = '';
+
+                function typeNext() {
+                    if (index < chars.length) {
+                        element.textContent = chars.slice(0, index + 1).join('');
+                        index += 1;
+                        window.setTimeout(typeNext, 22);
+                        return;
+                    }
+
+                    element.classList.remove('is-typing');
+                    if (typeof onDone === 'function') onDone();
+                }
+
+                typeNext();
+            }
+
+            function startTypewriter() {
+                if (!fullText || typingStarted) return;
+                typingStarted = true;
+
+                if (reduceMotion) {
+                    textEl.textContent = fullText;
+                    if (authorEl) {
+                        authorEl.textContent = fullAuthor;
+                        authorEl.classList.add('is-visible');
+                    }
+                    return;
+                }
+
+                typeInto(textEl, fullText, function () {
+                    if (!authorEl || !fullAuthor) return;
+                    window.setTimeout(function () {
+                        authorEl.classList.add('is-visible');
+                        typeInto(authorEl, fullAuthor);
+                    }, 180);
+                });
+            }
+
+            if (boxEl) {
+                const boxHeight = boxEl.getBoundingClientRect().height;
+                if (boxHeight > 0) {
+                    boxEl.style.minHeight = boxHeight + 'px';
+                }
+            }
+
+            textEl.textContent = '';
+            if (authorEl) authorEl.textContent = '';
+
+            if (reduceMotion) {
+                startTypewriter();
+            } else if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            startTypewriter();
+                            observer.disconnect();
+                        }
+                    });
+                }, {
+                    threshold: 0.25,
+                    rootMargin: '0px 0px -8% 0px'
+                });
+                observer.observe(root);
+            } else {
+                startTypewriter();
+            }
+        }
+
+        // ========== BLOCK1: появление, печать цитаты, скролл по содержанию ==========
+        (function initBlock1Animations() {
+            const block1 = document.querySelector('.block1-glav');
+            if (!block1) return;
+
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const quote = block1.querySelector('.block1-glav__quote');
+
+            createScrollTypewriter({
+                root: quote,
+                textEl: block1.querySelector('.block1-glav__quote-text[data-typewriter]'),
+                authorEl: block1.querySelector('.block1-glav__quote-author'),
+                boxEl: quote ? quote.querySelector('.block1-glav__quote-inner') : null
+            });
+
+            if (reduceMotion) {
+                block1.classList.add('is-animated');
+            } else {
+                window.requestAnimationFrame(function () {
+                    block1.classList.add('is-animated');
+                });
+            }
+
+            const tocLinks = block1.querySelectorAll('.block1-glav__toc-link');
+            tocLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    const href = link.getAttribute('href');
+                    if (!href || href.charAt(0) !== '#') return;
+
+                    const target = document.querySelector(href);
+                    if (!target) return;
+
+                    event.preventDefault();
+                    tocLinks.forEach(function (item) {
+                        item.classList.remove('is-active');
+                    });
+                    link.classList.add('is-active');
+
+                    target.scrollIntoView({
+                        behavior: reduceMotion ? 'auto' : 'smooth',
+                        block: 'start'
+                    });
+
+                    if (history.replaceState) {
+                        history.replaceState(null, '', href);
+                    }
+                });
+            });
+        })();
+
+        // ========== BLOCK3: печать цитаты-заметки ==========
+        (function initBlock3NoteTypewriter() {
+            const note = document.querySelector('.block3-algo__note');
+            if (!note) return;
+
+            createScrollTypewriter({
+                root: note,
+                textEl: note.querySelector('.block3-algo__note-text[data-typewriter]'),
+                authorEl: note.querySelector('.block3-algo__note-author'),
+                boxEl: note
+            });
+        })();
+
+        // ========== BLOCK4: появление элементов по очереди ==========
+        (function initBlock4Reveal() {
+            const block4 = document.querySelector('.block4-flags');
+            if (!block4) return;
+
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const reveals = block4.querySelectorAll('.block4-flags__reveal');
+
+            reveals.forEach(function (el, index) {
+                el.style.animationDelay = (0.08 + index * 0.12) + 's';
+            });
+
+            function play() {
+                block4.classList.add('is-animated');
+            }
+
+            if (reduceMotion) {
+                play();
+                return;
+            }
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            play();
+                            observer.disconnect();
+                        }
+                    });
+                }, {
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -8% 0px'
+                });
+                observer.observe(block4);
+            } else {
+                play();
+            }
+        })();
+
+        // ========== BLOCK6: печать цитаты ==========
+        (function initBlock6QuoteTypewriter() {
+            const quote = document.querySelector('.block6-pay__quote');
+            if (!quote) return;
+
+            createScrollTypewriter({
+                root: quote,
+                textEl: quote.querySelector('.block6-pay__quote-text[data-typewriter]'),
+                authorEl: quote.querySelector('.block6-pay__quote-author'),
+                boxEl: quote.querySelector('.block6-pay__quote-inner')
+            });
+        })();
+
         // Карусель контактов офисов
         (function initBlock7OfficesCarousel() {
             const block7 = document.getElementById('offices');
