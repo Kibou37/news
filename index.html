@@ -177,34 +177,8 @@
             background-color: var(--color-green-primary);
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            .block1-glav__reveal,
-            .block1-glav.is-animated .block1-glav__reveal,
-            .block4-flags__reveal,
-            .block4-flags.is-animated .block4-flags__reveal {
-                opacity: 1;
-                transform: none;
-                animation: none;
-            }
-
-            .block1-glav__quote-text.is-typing::after,
-            .block3-algo__note-text.is-typing::after,
-            .block3-algo__note-author.is-typing::after,
-            .block6-pay__quote-text.is-typing::after,
-            .block6-pay__quote-author.is-typing::after {
-                display: none;
-            }
-
-            .block1-glav__quote-author,
-            .block3-algo__note-author,
-            .block6-pay__quote-author {
-                opacity: 1;
-            }
-        }
+        /* Не отключаем анимации по prefers-reduced-motion:
+           на Windows часто выключены «эффекты анимации», и страница кажется без анимаций. */
 
 
 
@@ -625,6 +599,7 @@
             font-size: var(--font-size-text);
             color: var(--color-gray-text);
             line-height: 1;
+            cursor: pointer;
         }
 
         .block2-why__num {
@@ -644,7 +619,8 @@
             transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         }
 
-        .block2-why__item:hover .block2-why__num {
+        .block2-why__item:hover .block2-why__num,
+        .block2-why__item.is-active .block2-why__num {
             background-color: var(--color-blue-dark);
             border-color: var(--color-blue-dark);
             color: var(--color-white);
@@ -3258,24 +3234,24 @@
 
                 <div class="block8-glav-cards">
                     <div class="block8-glav-cards-wrapper">
-                        <a href="#" class="block8-glav-card">
-                            <h3 class="block8-glav-card-h2">Проверка поставщиков волоконного лазера на&nbsp;благонадежность</h3>
+                        <a href="https://sibtransasia.ru/knowledge-base/dokumenty-dla-importa-iz-kitaa-polnyj-spisok" class="block8-glav-card" target="_blank" rel="noopener noreferrer">
+                            <h3 class="block8-glav-card-h2">Документы для импорта из&nbsp;Китая: полный список</h3>
                         </a>
 
-                        <a href="#" class="block8-glav-card">
-                            <h3 class="block8-glav-card-h2">Проверка поставщиков волоконного лазера на&nbsp;благонадежность</h3>
+                        <a href="https://sibtransasia.ru/knowledge-base/kak-oplacivat-postavsikam-v-kitae-v-2026-godu" class="block8-glav-card" target="_blank" rel="noopener noreferrer">
+                            <h3 class="block8-glav-card-h2">Как оплачивать поставщикам в&nbsp;Китае в&nbsp;2026&nbsp;году</h3>
                         </a>
 
-                        <a href="#" class="block8-glav-card">
-                            <h3 class="block8-glav-card-h2">Проверка поставщиков волоконного лазера на&nbsp;благонадежность</h3>
+                        <a href="https://sibtransasia.ru/knowledge-base/kak-oficial-no-vvozit-tovary-iz-kitaa-dla-wildberries-i-ozon" class="block8-glav-card" target="_blank" rel="noopener noreferrer">
+                            <h3 class="block8-glav-card-h2">Как официально ввозить товары из&nbsp;Китая для Wildberries и&nbsp;Ozon</h3>
                         </a>
 
-                        <a href="#" class="block8-glav-card">
-                            <h3 class="block8-glav-card-h2">Проверка поставщиков волоконного лазера на&nbsp;благонадежность</h3>
+                        <a href="https://sibtransasia.ru/knowledge-base/kak-proverit-postavsika-v-kitae-pered-oplatoj" class="block8-glav-card" target="_blank" rel="noopener noreferrer">
+                            <h3 class="block8-glav-card-h2">Как проверить поставщика в&nbsp;Китае перед оплатой</h3>
                         </a>
 
-                        <a href="#" class="block8-glav-card">
-                            <h3 class="block8-glav-card-h2">Проверка поставщиков волоконного лазера на&nbsp;благонадежность</h3>
+                        <a href="https://sibtransasia.ru/knowledge-base/korrektirovka-tamozennoj-stoimosti-kak-izbezat-kts-2" class="block8-glav-card" target="_blank" rel="noopener noreferrer">
+                            <h3 class="block8-glav-card-h2">Корректировка таможенной стоимости: как избежать КТС</h3>
                         </a>
                     </div>
                 </div>
@@ -3446,6 +3422,47 @@
     </footer>
 
 <script>
+        function onEnterView(element, callback) {
+            if (!element) return;
+
+            var done = false;
+            function run() {
+                if (done) return;
+                done = true;
+                callback();
+            }
+
+            function isVisible() {
+                var rect = element.getBoundingClientRect();
+                var vh = window.innerHeight || document.documentElement.clientHeight;
+                return rect.bottom > 60 && rect.top < vh - 40;
+            }
+
+            if (isVisible()) {
+                run();
+                return;
+            }
+
+            if ('IntersectionObserver' in window) {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            observer.disconnect();
+                            run();
+                        }
+                    });
+                }, { threshold: 0.05, rootMargin: '0px' });
+                observer.observe(element);
+            }
+
+            window.addEventListener('scroll', function onScroll() {
+                if (isVisible()) {
+                    window.removeEventListener('scroll', onScroll);
+                    run();
+                }
+            }, { passive: true });
+        }
+
         function createScrollTypewriter(config) {
             const root = config.root;
             const textEl = config.textEl;
@@ -3453,7 +3470,6 @@
             const boxEl = config.boxEl || root;
             if (!root || !textEl) return;
 
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const fullText = textEl.textContent.replace(/\s+/g, ' ').trim();
             const fullAuthor = authorEl ? authorEl.textContent.replace(/\s+/g, ' ').trim() : '';
             let typingStarted = false;
@@ -3483,15 +3499,6 @@
                 if (!fullText || typingStarted) return;
                 typingStarted = true;
 
-                if (reduceMotion) {
-                    textEl.textContent = fullText;
-                    if (authorEl) {
-                        authorEl.textContent = fullAuthor;
-                        authorEl.classList.add('is-visible');
-                    }
-                    return;
-                }
-
                 typeInto(textEl, fullText, function () {
                     if (!authorEl || !fullAuthor) return;
                     window.setTimeout(function () {
@@ -3511,24 +3518,7 @@
             textEl.textContent = '';
             if (authorEl) authorEl.textContent = '';
 
-            if (reduceMotion) {
-                startTypewriter();
-            } else if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
-                        if (entry.isIntersecting) {
-                            startTypewriter();
-                            observer.disconnect();
-                        }
-                    });
-                }, {
-                    threshold: 0.25,
-                    rootMargin: '0px 0px -8% 0px'
-                });
-                observer.observe(root);
-            } else {
-                startTypewriter();
-            }
+            onEnterView(root, startTypewriter);
         }
 
         // ========== BLOCK1: появление, печать цитаты, скролл по содержанию ==========
@@ -3536,7 +3526,6 @@
             const block1 = document.querySelector('.block1-glav');
             if (!block1) return;
 
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const quote = block1.querySelector('.block1-glav__quote');
 
             createScrollTypewriter({
@@ -3546,13 +3535,11 @@
                 boxEl: quote ? quote.querySelector('.block1-glav__quote-inner') : null
             });
 
-            if (reduceMotion) {
-                block1.classList.add('is-animated');
-            } else {
+            window.requestAnimationFrame(function () {
                 window.requestAnimationFrame(function () {
                     block1.classList.add('is-animated');
                 });
-            }
+            });
 
             const tocLinks = block1.querySelectorAll('.block1-glav__toc-link');
             tocLinks.forEach(function (link) {
@@ -3570,13 +3557,26 @@
                     link.classList.add('is-active');
 
                     target.scrollIntoView({
-                        behavior: reduceMotion ? 'auto' : 'smooth',
+                        behavior: 'smooth',
                         block: 'start'
                     });
 
                     if (history.replaceState) {
                         history.replaceState(null, '', href);
                     }
+                });
+            });
+        })();
+
+        // ========== BLOCK2: клик по цифрам ==========
+        (function initBlock2NumClicks() {
+            const items = document.querySelectorAll('.block2-why__item');
+            items.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    items.forEach(function (el) {
+                        el.classList.remove('is-active');
+                    });
+                    item.classList.add('is-active');
                 });
             });
         })();
@@ -3599,38 +3599,14 @@
             const block4 = document.querySelector('.block4-flags');
             if (!block4) return;
 
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const reveals = block4.querySelectorAll('.block4-flags__reveal');
-
             reveals.forEach(function (el, index) {
                 el.style.animationDelay = (0.08 + index * 0.12) + 's';
             });
 
-            function play() {
+            onEnterView(block4, function () {
                 block4.classList.add('is-animated');
-            }
-
-            if (reduceMotion) {
-                play();
-                return;
-            }
-
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
-                        if (entry.isIntersecting) {
-                            play();
-                            observer.disconnect();
-                        }
-                    });
-                }, {
-                    threshold: 0.2,
-                    rootMargin: '0px 0px -8% 0px'
-                });
-                observer.observe(block4);
-            } else {
-                play();
-            }
+            });
         })();
 
         // ========== BLOCK6: печать цитаты ==========
