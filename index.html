@@ -14,7 +14,8 @@
             .block1-glav__quote-author,
             .block3-algo__note-author,
             .block4-flags__reveal,
-            .block6-pay__quote-author {
+            .block6-pay__quote-author,
+            .reveal {
                 opacity: 1 !important;
                 transform: none !important;
                 animation: none !important;
@@ -110,31 +111,39 @@
         }
 
         .block4-flags.is-animated .block4-flags__reveal {
-            animation: block1-fade-up 0.65s ease forwards;
+            animation: block1-fade-up 0.7s ease forwards;
+        }
+
+        .reveal {
+            opacity: 0;
+        }
+
+        .is-animated .reveal {
+            animation: block1-fade-up 0.7s ease forwards;
         }
 
         .block1-glav.is-animated .block1-glav__label {
-            animation-delay: 0.05s;
+            animation-delay: 0.1s;
         }
 
         .block1-glav.is-animated .block1-glav__title {
-            animation-delay: 0.2s;
+            animation-delay: 0.4s;
         }
 
         .block1-glav.is-animated .block1-glav__lead {
-            animation-delay: 0.35s;
+            animation-delay: 0.7s;
         }
 
         .block1-glav.is-animated .block1-glav__author {
-            animation-delay: 0.5s;
+            animation-delay: 1s;
         }
 
         .block1-glav.is-animated .block1-glav__image {
-            animation-delay: 0.65s;
+            animation-delay: 1.3s;
         }
 
         .block1-glav.is-animated .block1-glav__toc {
-            animation-delay: 0.8s;
+            animation-delay: 1.6s;
         }
 
         .block1-glav__quote-text.is-typing::after,
@@ -2685,46 +2694,46 @@
             <div class="main-container">
                 <div class="block2-why__content">
 
-                    <h2 class="block2-why__title">
+                    <h2 class="block2-why__title reveal">
                         Почему проверка поставщика критически важна
                     </h2>
 
-                    <p class="block2-why__text">
+                    <p class="block2-why__text reveal">
                         Китайский рынок характеризуется высокой конкуренцией и&nbsp;разнообразием
                         игроков: от&nbsp;крупных заводов до&nbsp;посредников-однодневок.
                         Отсутствие должной проверки может привести к&nbsp;следующим последствиям:
                     </p>
 
                     <ol class="block2-why__list">
-                        <li class="block2-why__item">
+                        <li class="block2-why__item reveal">
                             <span class="block2-why__num" aria-hidden="true">1</span>
                             <span>Поставка товара ненадлежащего качества или бракованной продукции;</span>
                         </li>
-                        <li class="block2-why__item">
+                        <li class="block2-why__item reveal">
                             <span class="block2-why__num" aria-hidden="true">2</span>
                             <span>Задержка отгрузки и&nbsp;срыв сроков поставок;</span>
                         </li>
-                        <li class="block2-why__item">
+                        <li class="block2-why__item reveal">
                             <span class="block2-why__num" aria-hidden="true">3</span>
                             <span>Мошеннические схемы с&nbsp;предоплатой;</span>
                         </li>
-                        <li class="block2-why__item">
+                        <li class="block2-why__item reveal">
                             <span class="block2-why__num" aria-hidden="true">4</span>
                             <span>Проблемы с&nbsp;таможенным оформлением из‑за отсутствия необходимых сертификатов;</span>
                         </li>
-                        <li class="block2-why__item">
+                        <li class="block2-why__item reveal">
                             <span class="block2-why__num" aria-hidden="true">5</span>
                             <span>Юридические сложности при возникновении споров.</span>
                         </li>
                     </ol>
 
-                    <p class="block2-why__desc">
+                    <p class="block2-why__desc reveal">
                         Проверка занимает от&nbsp;4&nbsp;рабочих часов и&nbsp;позволяет избежать
                         убытков, многократно превышающих затраты на&nbsp;верификацию.
                     </p>
 
                     <img
-                        class="block2-why__image"
+                        class="block2-why__image reveal"
                         src="images/block2/why.webp"
                         alt="Проверка продукции на производстве"
                         width="800"
@@ -2739,14 +2748,14 @@
         <section class="block3-algo" id="algorithm">
             <div class="main-container">
 
-                <h2 class="block3-algo__title">
+                <h2 class="block3-algo__title reveal">
                     Пошаговый алгоритм проверки китайского поставщика
                 </h2>
 
                 <div class="block3-algo__steps">
 
                     <!-- Этап 1 -->
-                    <div class="block3-algo__step">
+                    <div class="block3-algo__step reveal">
                         <div class="block3-algo__step-header">
                             <img src="images/block3/arrow-green.svg" alt="" class="block3-algo__icon" aria-hidden="true">
                             <div class="block3-algo__step-body">
@@ -2782,7 +2791,7 @@
                     </div>
 
                     <!-- Этап 2 -->
-                    <div class="block3-algo__step">
+                    <div class="block3-algo__step reveal">
                         <div class="block3-algo__step-header">
                             <img src="images/block3/arrow-green.svg" alt="" class="block3-algo__icon" aria-hidden="true">
                             <div class="block3-algo__step-body">
@@ -2827,7 +2836,7 @@
                     </div>
 
                     <!-- Этап 3 -->
-                    <div class="block3-algo__step">
+                    <div class="block3-algo__step reveal">
                         <div class="block3-algo__step-header">
                             <img src="images/block3/arrow-green.svg" alt="" class="block3-algo__icon" aria-hidden="true">
                             <div class="block3-algo__step-body">
@@ -2865,7 +2874,7 @@
                     </aside>
 
                     <!-- Этап 4 -->
-                    <div class="block3-algo__step">
+                    <div class="block3-algo__step reveal">
                         <div class="block3-algo__step-header">
                             <img src="images/block3/arrow-green.svg" alt="" class="block3-algo__icon" aria-hidden="true">
                             <div class="block3-algo__step-body">
@@ -2890,7 +2899,7 @@
 
                 </div>
 
-                <p class="block3-algo__outro">
+                <p class="block3-algo__outro reveal">
                     Для заказов от&nbsp;10&nbsp;000 долларов целесообразно привлечь независимую
                     инспекцию для проверки товара непосредственно на&nbsp;складе поставщика перед
                     отгрузкой. Наша компания предлагает услуги проверки с&nbsp;русскоговорящим
@@ -2981,11 +2990,11 @@
         <section class="block5-table" id="comparison">
             <div class="main-container">
 
-                <h2 class="block5-table__title">
+                <h2 class="block5-table__title reveal">
                     Сравнительная таблица методов проверки
                 </h2>
 
-                <div class="block5-table__wrap">
+                <div class="block5-table__wrap reveal">
                     <table class="block5-table__table">
                         <thead>
                             <tr>
@@ -3043,26 +3052,26 @@
         <section class="block6-pay" id="payment">
             <div class="main-container">
 
-                <h2 class="block6-pay__title">Безопасные условия оплаты</h2>
+                <h2 class="block6-pay__title reveal">Безопасные условия оплаты</h2>
 
-                <p class="block6-pay__text">
+                <p class="block6-pay__text reveal">
                     После успешной проверки важно выбрать оптимальный способ расчета:
                 </p>
 
                 <ol class="block6-pay__list">
-                    <li class="block6-pay__item">
+                    <li class="block6-pay__item reveal">
                         <strong>Аккредитив</strong> — банк перечисляет средства поставщику только после 
                         предоставления документов, подтверждающих отгрузку. Надежно, но требует времени и комиссий.
                     </li>
-                    <li class="block6-pay__item">
+                    <li class="block6-pay__item reveal">
                         <strong>Оплата через гарант-сервисы (Escrow)</strong> — средства 
                         блокируются на специальном счете до подтверждения получения товара.
                     </li>
-                    <li class="block6-pay__item">
+                    <li class="block6-pay__item reveal">
                         <strong>Частичная предоплата</strong> — например, 30% аванс, 70% — после предоставления 
                         фото/видео отгруженного товара и копий транспортных документов.
                     </li>
-                    <li class="block6-pay__item">
+                    <li class="block6-pay__item reveal">
                         <strong>Отсрочка платежа</strong> — возможна при налаженных 
                         долгосрочных отношениях и подтвержденной репутации.
                     </li>
@@ -3082,19 +3091,19 @@
                 </blockquote>
 
                 <div class="block6-pay__outro" id="conclusion">
-                    <p class="block6-pay__text">
+                    <p class="block6-pay__text reveal">
                         Проверка китайского поставщика — многоэтапный процесс, требующий системного подхода. 
                         Сочетание работы с официальными реестрами, анализа цифрового следа компании, 
                         заказа образцов и, при необходимости, привлечения профильных экспертов позволяет 
                         минимизировать риски и выстроить устойчивые цепочки поставок.
 
                     </p>
-                    <p class="block6-pay__text">
+                    <p class="block6-pay__text reveal">
                         Инвестиции в этап верификации окупаются спокойствием, сохранением репутации и финансовой 
                         стабильностью вашего бизнеса. Помните: надежный партнер в Китае — это не удача, а результат 
                         тщательной предварительной работы.
                     </p>
-                    <p class="block6-pay__text">
+                    <p class="block6-pay__text reveal">
                         Наша компания предлагает услуги подбора и проверки китайского контрагента. 
                         Проверим вашего поставщика на благонадежность и проведем переговоры бесплатно. 
                         Если его добросовестность вызовет сомнения, предложим альтернативные 3+ поставщика под ваш таргет прайс и ТЗ.
@@ -3230,33 +3239,33 @@
         <!-- BLOCK-8: Дополнительные статьи -->
         <section class="block8-glav" id="articles">
             <div class="section-container">
-                <h2 class="block8-glav-h1">Дополнительные статьи</h2>
+                <h2 class="block8-glav-h1 reveal">Дополнительные статьи</h2>
 
                 <div class="block8-glav-cards">
                     <div class="block8-glav-cards-wrapper">
-                        <a href="https://sibtransasia.ru/knowledge-base/dokumenty-dla-importa-iz-kitaa-polnyj-spisok" class="block8-glav-card" target="_blank" rel="noopener noreferrer">
+                        <a href="https://sibtransasia.ru/knowledge-base/dokumenty-dla-importa-iz-kitaa-polnyj-spisok" class="block8-glav-card reveal" target="_blank" rel="noopener noreferrer">
                             <h3 class="block8-glav-card-h2">Документы для импорта из&nbsp;Китая: полный список</h3>
                         </a>
 
-                        <a href="https://sibtransasia.ru/knowledge-base/kak-oplacivat-postavsikam-v-kitae-v-2026-godu" class="block8-glav-card" target="_blank" rel="noopener noreferrer">
+                        <a href="https://sibtransasia.ru/knowledge-base/kak-oplacivat-postavsikam-v-kitae-v-2026-godu" class="block8-glav-card reveal" target="_blank" rel="noopener noreferrer">
                             <h3 class="block8-glav-card-h2">Как оплачивать поставщикам в&nbsp;Китае в&nbsp;2026&nbsp;году</h3>
                         </a>
 
-                        <a href="https://sibtransasia.ru/knowledge-base/kak-oficial-no-vvozit-tovary-iz-kitaa-dla-wildberries-i-ozon" class="block8-glav-card" target="_blank" rel="noopener noreferrer">
+                        <a href="https://sibtransasia.ru/knowledge-base/kak-oficial-no-vvozit-tovary-iz-kitaa-dla-wildberries-i-ozon" class="block8-glav-card reveal" target="_blank" rel="noopener noreferrer">
                             <h3 class="block8-glav-card-h2">Как официально ввозить товары из&nbsp;Китая для Wildberries и&nbsp;Ozon</h3>
                         </a>
 
-                        <a href="https://sibtransasia.ru/knowledge-base/kak-proverit-postavsika-v-kitae-pered-oplatoj" class="block8-glav-card" target="_blank" rel="noopener noreferrer">
+                        <a href="https://sibtransasia.ru/knowledge-base/kak-proverit-postavsika-v-kitae-pered-oplatoj" class="block8-glav-card reveal" target="_blank" rel="noopener noreferrer">
                             <h3 class="block8-glav-card-h2">Как проверить поставщика в&nbsp;Китае перед оплатой</h3>
                         </a>
 
-                        <a href="https://sibtransasia.ru/knowledge-base/korrektirovka-tamozennoj-stoimosti-kak-izbezat-kts-2" class="block8-glav-card" target="_blank" rel="noopener noreferrer">
+                        <a href="https://sibtransasia.ru/knowledge-base/korrektirovka-tamozennoj-stoimosti-kak-izbezat-kts-2" class="block8-glav-card reveal" target="_blank" rel="noopener noreferrer">
                             <h3 class="block8-glav-card-h2">Корректировка таможенной стоимости: как избежать КТС</h3>
                         </a>
                     </div>
                 </div>
 
-                <div class="block8-glav-pagination">
+                <div class="block8-glav-pagination reveal">
                     <span class="block8-glav-pagination-dot active"></span>
                     <span class="block8-glav-pagination-dot"></span>
                     <span class="block8-glav-pagination-dot"></span>
@@ -3581,6 +3590,26 @@
             });
         })();
 
+        function initSequentialReveal(root) {
+            if (!root) return;
+            var items = root.querySelectorAll('.reveal');
+            if (!items.length) return;
+
+            items.forEach(function (el, index) {
+                el.style.animationDelay = (0.15 + index * 0.22) + 's';
+            });
+
+            onEnterView(root, function () {
+                root.classList.add('is-animated');
+            });
+        }
+
+        initSequentialReveal(document.querySelector('.block2-why'));
+        initSequentialReveal(document.querySelector('.block3-algo'));
+        initSequentialReveal(document.querySelector('.block5-table'));
+        initSequentialReveal(document.querySelector('.block6-pay'));
+        initSequentialReveal(document.querySelector('.block8-glav'));
+
         // ========== BLOCK3: печать цитаты-заметки ==========
         (function initBlock3NoteTypewriter() {
             const note = document.querySelector('.block3-algo__note');
@@ -3601,7 +3630,7 @@
 
             const reveals = block4.querySelectorAll('.block4-flags__reveal');
             reveals.forEach(function (el, index) {
-                el.style.animationDelay = (0.08 + index * 0.12) + 's';
+                el.style.animationDelay = (0.15 + index * 0.22) + 's';
             });
 
             onEnterView(block4, function () {
